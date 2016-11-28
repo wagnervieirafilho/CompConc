@@ -1,8 +1,8 @@
 import java.util.Scanner;
-class Assentos{                     	// recursos compartilhados
-	int[] t_Assentos;    	// Estrutura que representa todos os assentos
-	int t_Assento;		// Representa apenas um assento
-	int n;			// Quantidade de assentos
+class Assentos{                     		// recursos compartilhados
+	private int[] t_Assentos;    	// Estrutura que representa todos os assentos
+	private int t_Assento;		// Representa apenas um assento
+	private int n;			// Quantidade de assentos
 
 	Assentos(int n){
 		int i;
@@ -11,7 +11,6 @@ class Assentos{                     	// recursos compartilhados
 		for(i = 0; i < this.n; i++){
 			t_Assentos[i] = 0;
 		}
-		System.out.println("todos os "+this.n+" assentos foram inicializados com 0");
 	}
 
 	public void visualizaAssentos(){
@@ -23,12 +22,16 @@ class Assentos{                     	// recursos compartilhados
 				System.out.println("Assento "+j+": LIVRE");					
 			}
 			else
-				System.out.println("Assento "+j+": INDISPONÍVEL");
-			t_Assentos[i] = 0;
-
+				System.out.println("Assento "+j+": RESERVADO");
 		}
 	}
-	public int alocaAssentoLivre(int numAssento, int id){ return 1;}
+	public int alocaAssentoLivre(int numAssento, int id){ 
+		return 1;
+	}
+
+	public void liberaAssento(int numAssento, int id){
+
+	}
 
 
 }
