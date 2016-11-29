@@ -13,7 +13,7 @@ class Assentos{                     			// recursos compartilhados
 	private int n;				// Quantidade de assentos
 
 	Assentos(int n){
-		int i;				
+		int i;
 		this.n = n;
 		t_Assentos = new int[n]; 	// aloca a quantidade de assentos
 		for(i = 0; i < this.n; i++){
@@ -27,13 +27,13 @@ class Assentos{                     			// recursos compartilhados
 		for(i = 0; i < this.n; i++){
 			j = i + 1;
 			if (t_Assentos[i] == 0) {
-				System.out.println("Assento "+j+": LIVRE");		
+				System.out.println("Assento "+j+": LIVRE");
 			}
 			else
 				System.out.println("Assento "+j+": RESERVADO");
 		}
 	}
-	
+
 	public int alocaAssentoLivre(int id){  		// aloca um assento aleatório
 		Random random  = new Random();
 		int numero, retorno;
@@ -49,7 +49,7 @@ class Assentos{                     			// recursos compartilhados
 		int posicao = numAssento-1;
 		int i;
 		int assentosEsgotados = 1; // 0: não esgotado; 1: esgotado
-		synchronized(this){ 
+		synchronized(this){
 
 			for (i = 0; i < this.n; i++){			// verifica se ainda há assentos disponíveis
 				if(t_Assentos[i] == 0)
@@ -84,7 +84,7 @@ class Assentos{                     			// recursos compartilhados
 					System.out.println("Assento "+numAssento+" liberado com suscesso!");
 				}
 				else{			// se o usuário que está tentando liberar o assento não for o mesmo que reservou, exibe mensagem
-					System.out.println("Cliente "+id+" não pode liberar esse assento, foi reservado por: "+t_Assentos[posicao]);	
+					System.out.println("Cliente "+id+" não pode liberar esse assento, foi reservado por: "+t_Assentos[posicao]);
 				}
 			}
 			else{
@@ -99,25 +99,12 @@ class Principal{
 	static int nASSENTOS;
 
 	public static void main(String[] args){
-		nASSENTOS = Integer.parseInt(args[0]);
-		 Assentos assentos = new Assentos(nASSENTOS);
-		assentos.alocaAssentoDado(3,2);
-		assentos.alocaAssentoDado(1,5);
-		assentos.visualizaAssentos();
-		assentos.liberaAssento(3,2);
-		System.out.println("\n");
+		String caminhoArqSaida;
+		arqSaida = args[0];
+		nASSENTOS = Integer.parseInt(args[1]);
+		Assentos assentos = new Assentos(nASSENTOS);
+		//falta criar as threads clientes e a thread consumidora do buffer de log
 
-		assentos.visualizaAssentos();
-		assentos.alocaAssentoDado(1,6);
-		System.out.println("\n");
-
-		assentos.visualizaAssentos();
-		assentos.alocaAssentoLivre(3);
-		assentos.alocaAssentoLivre(3);
-		System.out.println("\n");
-
-		assentos.visualizaAssentos();
-	
 	}
 
 
