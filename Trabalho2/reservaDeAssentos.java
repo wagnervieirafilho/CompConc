@@ -6,6 +6,7 @@
 */
 
 import java.util.Random;
+import java.io.IOException;
 
 class Assentos{                     			// recursos compartilhados
 	private int[] t_Assentos;    		// Estrutura que representa todos os assentos
@@ -47,8 +48,8 @@ class Assentos{                     			// recursos compartilhados
 	public int alocaAssentoDado(int numAssento, int id){		// aloca um assento escolhido pelo usuário
 		int posicao = numAssento-1;
 		int i;
-		int assentosEsgotados = 1;
-		synchronized(this){
+		int assentosEsgotados = 1; // 0: não esgotado; 1: esgotado
+		synchronized(this){ 
 
 			for (i = 0; i < this.n; i++){			// verifica se ainda há assentos disponíveis
 				if(t_Assentos[i] == 0)
@@ -95,11 +96,11 @@ class Assentos{                     			// recursos compartilhados
 
 }
 class Principal{
-	static int NASSENTOS;
+	static int nASSENTOS;
 
 	public static void main(String[] args){
-		NASSENTOS = Integer.parseInt(args[0]);
-		Assentos assentos = new Assentos(NASSENTOS);
+		nASSENTOS = Integer.parseInt(args[0]);
+		 Assentos assentos = new Assentos(nASSENTOS);
 		assentos.alocaAssentoDado(3,2);
 		assentos.alocaAssentoDado(1,5);
 		assentos.visualizaAssentos();
@@ -116,7 +117,7 @@ class Principal{
 		System.out.println("\n");
 
 		assentos.visualizaAssentos();
-
+	
 	}
 
 
