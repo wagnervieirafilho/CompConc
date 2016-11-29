@@ -1,9 +1,11 @@
 /*
 	Nome: Wagner Vieira
 	Matéria: Computação Concorrente
-	Prof: Silvana Rosetto
+	Prof: Silvana Rossetto
 
 */
+
+import java.util.Random;
 
 class Assentos{                     			// recursos compartilhados
 	private int[] t_Assentos;    		// Estrutura que representa todos os assentos
@@ -31,8 +33,15 @@ class Assentos{                     			// recursos compartilhados
 		}
 	}
 	
-	public int alocaAssentoLivre(int id){  		// ainda falta fazer
-		return 1;
+	public int alocaAssentoLivre(int id){  		// aloca um assento aleatório
+		Random random  = new Random();
+		int numero, retorno;
+		numero = random.nextInt(this.n);
+		while(numero == 0){
+			numero = random.nextInt(this.n);
+		}
+		retorno = alocaAssentoDado(numero, id);
+		return retorno;
 	}
 
 	public int alocaAssentoDado(int numAssento, int id){		// aloca um assento escolhido pelo usuário
@@ -91,6 +100,23 @@ class Principal{
 	public static void main(String[] args){
 		NASSENTOS = Integer.parseInt(args[0]);
 		Assentos assentos = new Assentos(NASSENTOS);
+		assentos.alocaAssentoDado(3,2);
+		assentos.alocaAssentoDado(1,5);
+		assentos.visualizaAssentos();
+		assentos.liberaAssento(3,2);
+		System.out.println("\n");
+
+		assentos.visualizaAssentos();
+		assentos.alocaAssentoDado(1,6);
+		System.out.println("\n");
+
+		assentos.visualizaAssentos();
+		assentos.alocaAssentoLivre(3);
+		assentos.alocaAssentoLivre(3);
+		System.out.println("\n");
+
+		assentos.visualizaAssentos();
+
 	}
 
 
