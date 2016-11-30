@@ -95,10 +95,8 @@ class Assentos{                     			// recursos compartilhados
 		}
 	}
 
-	public int getIdAssento(int numAssento){
-		int posicao = numAssento-1;
-		return t_Assentos[posicao];
+	public synchronized int[] getMap(){
+		return t_Assentos;
 	}
-
 
 }

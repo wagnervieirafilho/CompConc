@@ -24,9 +24,9 @@ class Buffer{
 		               in = (in + 1) % N;
 		               count++;
 		               this.notify();
-		} 
+		}
 		catch (InterruptedException e) { }
-  	}
+	}
 
   	public synchronized void Remove() {
    		int id;
