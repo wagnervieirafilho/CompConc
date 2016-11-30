@@ -3,7 +3,7 @@ import java.io.IOException;
 
 class Assentos{                     			// recursos compartilhados
 	private int[] t_Assentos;    		// Estrutura que representa todos os assentos
-	private int n;				// Quantidade de assentos
+	private static int n;				// Quantidade de assentos
 
 	Assentos(int n){
 		int i;
@@ -84,6 +84,11 @@ class Assentos{                     			// recursos compartilhados
 				System.out.println("Este assento não pode ser liberado pois não está reservado!");  // mensagem de erro caso o usuário tente liberar um assento que não está reservado
 			}
 		}
+	}
+
+	public int getIdAssento(int numAssento){
+		int posicao = numAssento-1;
+		return t_Assentos[posicao];
 	}
 
 
