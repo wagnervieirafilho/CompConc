@@ -27,15 +27,24 @@ class Assentos{                     			// recursos compartilhados
 		}
 	}
 
-	public int alocaAssentoLivre(int id){  		// aloca um assento aleatório
+	public int[] alocaAssentoLivre(int id){  		// aloca um assento aleatório
 		Random random  = new Random();
-		int numero, retorno;
+		int[] retorno = new int[2];
+		int numero, aux;
+		retorno[0] = 0;		// diz se foi possível alocar ou não
+		retorno[1] = 0;		// diz qual assento foi alocado
+
 		numero = random.nextInt(this.n);
 		while(numero == 0){
 			numero = random.nextInt(this.n);
 		}
-		retorno = alocaAssentoDado(numero, id);
-		return retorno;
+		aux = alocaAssentoDado(numero, id);
+		if(aux != 0){
+			retorno[0] = 1;
+			retorno[1] = numero;
+		}
+
+		return retorno;		// retorna dois valores. Um diz se um assento foi alocado e o outro diz qual foi o assento
 	}
 
 	public int alocaAssentoDado(int numAssento, int id){		// aloca um assento escolhido pelo usuário
