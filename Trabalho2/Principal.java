@@ -11,12 +11,12 @@ import java.io.IOException;
 class Principal{
 	static int nASSENTOS;
 	static final int P = 1;
-	String static caminhoArqSaida;
+	static String caminhoArqSaida;
 
 	public static void main(String[] args){
 
 		Assentos assentos = new Assentos(nASSENTOS);	// assentos
-		Buffer buffer = new Buffer();// Monitor
+		Buffer buffer = new Buffer(nASSENTOS);		// Monitor
 
 		Consumidor cons;					// Consumidora
 		Produtor1 prod1;					// Produtores
@@ -32,22 +32,23 @@ class Principal{
 		cons.start();
 
 		prod1 = new Produtor1(1, assentos, buffer);		//inicia a thread que simula um cliente fazendo uma certa série de operações
-		prod.start();
+		prod1.start();
 
 		prod2 = new Produtor2(2, assentos, buffer);		//inicia a thread que simula um cliente fazendo outra certa série de operações
-		prod.start();
+		prod2.start();
 
 		prod3 = new Produtor3(3, assentos, buffer);		//inicia a thread que simula um cliente fazendo outra certa série de operações
-		prod.start();
+		prod3.start();
 
 		prod4 = new Produtor4(4, assentos, buffer);		//inicia a thread que simula um cliente fazendo outra certa série de operações
-		prod.start();
+		prod4.start();
 
+
+		try { cons.join(); } catch (InterruptedException e) { return; }
 		try { prod1.join(); } catch (InterruptedException e) { return; }
 		try { prod2.join(); } catch (InterruptedException e) { return; }
 		try { prod3.join(); } catch (InterruptedException e) { return; }
 		try { prod4.join(); } catch (InterruptedException e) { return; }
 	}
-
 
 }
