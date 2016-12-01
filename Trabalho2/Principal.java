@@ -15,6 +15,9 @@ class Principal{
 
 	public static void main(String[] args){
 
+		nASSENTOS = Integer.parseInt(args[1]);		//pega o numero de assentos da linha de comando
+		caminhoArqSaida = args[0];				//pega o caminho para o arquivo de log
+
 		Assentos assentos = new Assentos(nASSENTOS);	// assentos
 		Buffer buffer = new Buffer(nASSENTOS);		// Monitor
 
@@ -23,10 +26,6 @@ class Principal{
 		Produtor2 prod2;
 		Produtor3 prod3;
 		Produtor4 prod4;
-
-		nASSENTOS = Integer.parseInt(args[1]);		//pega o numero de assentos da linha de comando
-		caminhoArqSaida = args[0];				//pega o caminho para o arquivo de log
-
 
 		cons = new Consumidor(0, assentos, buffer);		//inicia a thread consumidora
 		cons.start();
