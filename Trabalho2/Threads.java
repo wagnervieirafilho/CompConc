@@ -13,28 +13,31 @@ class Consumidor extends Thread {
               // Método executado pela thread
               public void run (){
                 System.out.println("Ta na consumidora");
+
               }
 }
-
-
 
 // Produtor
 class Produtor1 extends Thread {
         int id;
         Assentos a;
         Buffer buffer;
+        int t_assento;
+        int[] v;
 
         // Construtor
         Produtor1 (int id, Assentos a, Buffer b) {
           this.id = id;
           this.a = a;
           this.buffer = b;
+          this.v = new int[2];
         }
 
         // Método executado pelo thread
         public void run () {
           System.out.println("Ta na produtora "+this.id);
-        }
+          this.a.visualizaAssentos();
+       }
 } 
 
 class Produtor2 extends Thread {
@@ -51,7 +54,7 @@ class Produtor2 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-          System.out.println("Ta na produtora "+this.id);
+              System.out.println("Ta na produtora "+this.id);
         }
 } 
 
@@ -69,7 +72,7 @@ class Produtor3 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-          System.out.println("Ta na produtora "+this.id);
+              System.out.println("Ta na produtora "+this.id);
         }
 } 
 
@@ -87,6 +90,6 @@ class Produtor4 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-          System.out.println("Ta na produtora "+this.id);
+            System.out.println("Ta na produtora "+this.id);
         }
 } 
