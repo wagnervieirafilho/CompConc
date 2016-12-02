@@ -14,7 +14,7 @@ class Consumidor extends Thread {
 
               // Método executado pela thread
               public void run (){
-                System.out.println("Ta na consumidora");
+               // -----------> FALTA IMPLEMENTAR               
               }
 }
 
@@ -36,8 +36,13 @@ class Produtor1 extends Thread {
         // Método executado pelo thread
         public void run () {
           this.a.visualizaAssentos();
-          v = this.a.alocaAssentoLivre(this.id);              //aloca assento aleatório e retorna vetor dizendo se foi possível alocar e qual assento foi alocado
+          this.buffer.Insere(this.id, 1, this.a.getMap());
+
+          v = this.a.alocaAssentoLivre(this.id);                //aloca assento aleatório e retorna vetor dizendo se foi possível alocar e qual assento foi alocado
+          this.buffer.Insere(this.id, 2, this.a.getMap());
+
           this.a.visualizaAssentos();
+          this.buffer.Insere(this.id, 1, this.a.getMap());
        }
 } 
 
@@ -57,9 +62,15 @@ class Produtor2 extends Thread {
         // Método executado pelo thread
         public void run () {
               this.a.visualizaAssentos();
+              this.buffer.Insere(this.id, 1, this.a.getMap());
+
               this.t_assento = 2;                                                 //assento que vai tentar alocar
+
               this.a.alocaAssentoDado(t_assento, this.id);    // aloca o assento dado
+              this.buffer.Insere(this.id, 3, this.a.getMap());
+
               this.a.visualizaAssentos();
+              this.buffer.Insere(this.id, 1, this.a.getMap());
 
         }
 } 
@@ -82,13 +93,22 @@ class Produtor3 extends Thread {
         // Método executado pelo thread
         public void run () {
             this.a.visualizaAssentos();
+            this.buffer.Insere(this.id, 1, this.a.getMap());
+
             v = this.a.alocaAssentoLivre(this.id);    //aloca assento aleatório e retorna vetor que diz se foi ou não possivel alocar e qual assento foi alocado
+            this.buffer.Insere(this.id, 2, this.a.getMap());
+
             if(v[0] != 0){                                              // se a alocação de fato ocorreu, t_assento recebe o assento que foi alocado
                 t_assento = v[1];
+
                 this.a.visualizaAssentos();
+                this.buffer.Insere(this.id, 1, this.a.getMap());
+
                 this.a.liberaAssento(t_assento, this.id); // libera assento que acabou de ser alocado
+                this.buffer.Insere(this.id, 4, this.a.getMap());
             }
             this.a.visualizaAssentos();
+            this.buffer.Insere(this.id, 1, this.a.getMap());
 
         }
 } 
@@ -108,11 +128,22 @@ class Produtor4 extends Thread {
         // Método executado pelo thread
         public void run () {
              this.a.visualizaAssentos();
+             this.buffer.Insere(this.id, 1, this.a.getMap());
+
               this.a.alocaAssentoDado(6,this.id);   //aloca assento 6 para cliente 4
+              this.buffer.Insere(this.id, 3, this.a.getMap());
+
               this.a.alocaAssentoDado(7,this.id);   //aloca assento 7 para cliente 4
+              this.buffer.Insere(this.id, 3, this.a.getMap());
+
               this.a.alocaAssentoDado(8,this.id);   //aloca assento 8 para cliente 4
+              this.buffer.Insere(this.id, 3, this.a.getMap());
+
               this.a.liberaAssento(1, this.id);           // tenta liberar assento que não foi alocado pelo cliente 4, vai dar erro!
+              this.buffer.Insere(this.id, 4, this.a.getMap());
+
               this.a.visualizaAssentos();
+              this.buffer.Insere(this.id, 1, this.a.getMap());
             
         }
 } 
