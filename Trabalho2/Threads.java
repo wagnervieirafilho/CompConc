@@ -1,3 +1,4 @@
+import java.io.IOException;
 // Consumidor
 class Consumidor extends Thread {
               int id;
@@ -14,7 +15,11 @@ class Consumidor extends Thread {
 
               // Método executado pela thread
               public void run (){
-               // -----------> FALTA IMPLEMENTAR               
+               // -----------> FALTA IMPLEMENTAR  A CONDIÇÃO DE PARADA DO LOOP   
+               try{      
+                  this.buffer.Remove(this.caminho);
+                }
+                catch(IOException e){}
               }
 }
 
@@ -36,13 +41,16 @@ class Produtor1 extends Thread {
         // Método executado pelo thread
         public void run () {
           this.a.visualizaAssentos();
-          this.buffer.Insere(this.id, 1, this.a.getMap());
-
-          v = this.a.alocaAssentoLivre(this.id);                //aloca assento aleatório e retorna vetor dizendo se foi possível alocar e qual assento foi alocado
-          this.buffer.Insere(this.id, 2, this.a.getMap());
+          this.buffer.Insere(this.id, 1, this.a.getMap());    //insere no buffer. O SEGUNDO PARÂMETRO INDICA QUAL ATIVIDADE FOI DISPARADA
+          //                                           |
+          // legenda para  o              | --------> 1: VISUALIZAR ASSENTOS - 2: ALOCAR ASSENTO ALEATÓRIO - 3: ALOCAR ASSENTO DADO - 4: LIBERAR ASSENTO
+          // segundo parametro      | 
+          
+          v = this.a.alocaAssentoLivre(this.id);                
+          this.buffer.Insere(this.id, 2, this.a.getMap());  //insere no buffer. O SEGUNDO PARÂMETRO INDICA QUAL ATIVIDADE FOI DISPARADA
 
           this.a.visualizaAssentos();
-          this.buffer.Insere(this.id, 1, this.a.getMap());
+          this.buffer.Insere(this.id, 1, this.a.getMap());  //insere no buffer. O SEGUNDO PARÂMETRO INDICA QUAL ATIVIDADE FOI DISPARADA
        }
 } 
 
