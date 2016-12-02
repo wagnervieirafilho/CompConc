@@ -8,70 +8,75 @@
 // Monitor
 class BanheiroUni {
   //declarar atributos do monitor
-  static int[] slots;
   static int  contMulher;
   static int  contHomem;
   static int ticket;
-  //int static in, out;
+  static int painelTicket;
 
   // Construtor
   BanheiroUni() {
     //inicializar os atributos do monitor
-    this.slots = new int[5];
     this.contMulher = 0;
     this.contHomem = 0;
-    this.ticket = 1;
+    this.ticket = 0;
+    this.painelTicket = 1;
+
   }
 
   public synchronized int getTicket(){
+    this.ticket++;
     return this.ticket;
   }
 
-  public synchronized void increaseTicket(){
-    this.ticket++;
+  public synchronized int getPainelTicket(){
+    return this.painelTicket;
+  }
+  public synchronized void increasePainelTicket(){
+    this.painelTicket++;
   }
 
   // Entrada para mulheres
   public synchronized void EntraMulher (int id, int meuTicket) {
     try {
-           while(contHomem != 0 && meuTicket != this.ticket){
+           while(contHomem != 0 || meuTicket != getPainelTicket()){
                         this.wait();
           }
           contMulher++;
+          increasePainelTicket();
 
-      System.out.println ("M[" + id + "]: entrou, total de " + contMulher+ " mulheres no banheiro");
+      System.out.println ("M[" + id + "] com ticket ["+meuTicket+"]: entrou, total de " + contMulher+ " mulheres no banheiro");
     } catch (InterruptedException e) { }
   }
 
   // Saida para mulheres
-  public synchronized void SaiMulher (int id) {
+  public synchronized void SaiMulher (int id, int meuTicket) {
       contMulher--;
-      increaseTicket();
       if(contMulher == 0){
               this.notifyAll();
       }
-      System.out.println ("M[" + id + "]: saiu, restam " + contMulher + " mulheres no banheiro");
+      System.out.println ("M[" + id + "] com ticket["+meuTicket+"]: saiu, restam " + contMulher + " mulheres no banheiro");
   }
 
   // Entrada para homens
   public synchronized void EntraHomem (int id, int meuTicket) {
     try {
-       while(contMulher != 0){
+       while(contMulher != 0 || meuTicket != getPainelTicket()){
                this.wait();
        }
        contHomem++;
+       increasePainelTicket();
 
-       System.out.println ("H[" + id + "]: entrou, total de " + contHomem + " homens no banheiro");
+       System.out.println ("H[" + id + "] com ticket["+meuTicket+"]: entrou, total de " + contHomem + " homens no banheiro");
     } catch (InterruptedException e) { }
   }
 
   // Saida para homens
-  public synchronized void SaiHomem (int id) {
+  public synchronized void SaiHomem (int id, int meuTicket) {
        contHomem--;
        if(contHomem == 0){
                this.notifyAll();
        }
-       System.out.println ("H[" + id + "]: saiu, restam " + contHomem + " homens no banheiro");
+       System.out.println ("H[" + id + "] com ticket["+meuTicket+"]: saiu, restam " + contHomem + " homens no banheiro");
   }
 }
 
@@ -98,7 +103,7 @@ class Mulher extends Thread {
         meuTicket = b.getTicket();
         this.b.EntraMulher(this.id, meuTicket);//--------------------------------------------------------------------------
         for (i=0; i<100000000; i++) {j=j/2;} //...loop bobo para simbolizar o tempo no banheiro
-        this.b.SaiMulher(this.id);
+        this.b.SaiMulher(this.id, meuTicket);
         sleep(this.delay);
       }
     } catch (InterruptedException e) { return; }
@@ -125,10 +130,10 @@ class Homem extends Thread {
     double j=777777777.7, i;
     try {
       for (;;) {
-        meuTicket = getTicket();
+        meuTicket = b.getTicket();
         this.b.EntraHomem(this.id, meuTicket);// -------------------------------------------------------------------------------
         for (i=0; i<100000000; i++) {j=j/2;} //...loop bobo para simbolizar o tempo no banheiro
-        this.b.SaiHomem(this.id);
+        this.b.SaiHomem(this.id, meuTicket);
         sleep(this.delay);
       }
     } catch (InterruptedException e) { return; }
