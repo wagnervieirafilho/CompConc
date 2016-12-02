@@ -3,17 +3,18 @@ class Consumidor extends Thread {
               int id;
               Assentos a;
               Buffer buffer;
+              String caminho;
 
-              Consumidor (int id, Assentos a, Buffer b) {
+              Consumidor (int id, Assentos a, Buffer b, String caminhoSaida) {
                     this.id = id;
                     this.a = a;
                     this.buffer = b;
+                    this.caminho = caminhoSaida;
               }
 
               // Método executado pela thread
               public void run (){
                 System.out.println("Ta na consumidora");
-
               }
 }
 
@@ -30,7 +31,6 @@ class Produtor1 extends Thread {
           this.id = id;
           this.a = a;
           this.buffer = b;
-          this.v = new int[2];
         }
 
         // Método executado pelo thread
