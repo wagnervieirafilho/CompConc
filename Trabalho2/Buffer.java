@@ -35,7 +35,7 @@ class Buffer{
 	}
 
   	public synchronized void Remove(String caminho) throws IOException{
-   		FileWriter arq = new FileWriter(caminho);
+   		FileWriter arq = new FileWriter(caminho, true);
     		PrintWriter gravarArq = new PrintWriter(arq);
 
    		int id;
@@ -66,8 +66,5 @@ class Buffer{
 			this.notify();
 		} 
 		catch (InterruptedException e) {}
-	}
-
-
-	
+	}	
 }
