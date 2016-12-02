@@ -27,7 +27,7 @@ class Principal{
 		Produtor3 prod3;
 		Produtor4 prod4;
 
-		cons = new Consumidor(0, assentos, buffer);		//inicia a thread consumidora
+		cons = new Consumidor(0, assentos, buffer, caminhoArqSaida);	//inicia a thread consumidora
 		cons.start();
 
 		prod1 = new Produtor1(1, assentos, buffer);		//inicia a thread que simula um cliente fazendo uma certa série de operações
