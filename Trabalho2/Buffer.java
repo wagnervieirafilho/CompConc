@@ -22,7 +22,6 @@ class Buffer{
 			              System.out.println("Buffer disponivel, liberando uma thread produtora..... ");
 			 }
 		               buffer[in].setItens(id, task, mapa);
-		               System.out.println("Item produzido == ");
 		               in = (in + 1) % N;
 		               count++;
 		               this.notify();
@@ -45,6 +44,12 @@ class Buffer{
 			id = buffer[out].getId();
 			task = buffer[out].getTask();
 			map = buffer[out].getMapa();
+
+			/*System.out.print(id+","+task+",[");
+			for (i = 0; i < this.nAssentos; i++){
+				System.out.print(map[i]+" ");
+			}
+			System.out.println("]");*/
 
 			out = (out + 1) % N;
 			count--;
