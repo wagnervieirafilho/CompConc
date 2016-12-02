@@ -57,20 +57,25 @@ class Assentos{                     			// recursos compartilhados
 				if(t_Assentos[i] == 0)
 					assentosEsgotados = 0;
 			}
-
-			if(assentosEsgotados == 0){							// se houver assentos disponíveis, tenta alocar
-				if(t_Assentos[posicao] != 0){
-					System.out.println("NEGADO! Assento "+numAssento+"já reservado");
+			if(numAssento <= this.n){
+				if(assentosEsgotados == 0){							// se houver assentos disponíveis, tenta alocar
+					if(t_Assentos[posicao] != 0){
+						System.out.println("NEGADO! Assento "+numAssento+" já reservado");
+						return 0;
+					}
+					else{
+						t_Assentos[posicao] = id;
+						System.out.println("Assento "+numAssento+" reservado com sucesso para Cliente "+id);
+						return 1;
+					}
+				}
+				else{									// se não houver assentos disponíveis, exibe mensagem
+					System.out.println("Desculpe, assentos esgotados!");
 					return 0;
 				}
-				else{
-					t_Assentos[posicao] = id;
-					System.out.println("Assento "+numAssento+" reservado com sucesso para Cliente "+id);
-					return 1;
-				}
 			}
-			else{									// se não houver assentos disponíveis, exibe mensagem
-				System.out.println("Desculpe, assentos esgotados!");
+			else{
+				System.out.println("Este assento não existe! Escolha um assento entre 1 e "+this.n+"...");
 				return 0;
 			}
 		}
