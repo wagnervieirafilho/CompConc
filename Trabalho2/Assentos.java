@@ -22,8 +22,9 @@ class Assentos{                     			// recursos compartilhados
 			if (t_Assentos[i] == 0) {
 				System.out.println("Assento "+j+": LIVRE");
 			}
-			else
+			else{
 				System.out.println("Assento "+j+": RESERVADO");
+			}
 		}
 	}
 
