@@ -4,9 +4,11 @@ class Buffer{
 	static final int N = 10; // tamanho do buffer
 	private Struct[] buffer = new Struct[N];  //reserva espaco para o buffer
  	private int count=0, in=0, out=0;   //variaveis compartilhadas
+ 	int nAssentos;
 
  	Buffer(int nAssentos){
  		int i;
+ 		this.nAssentos = nAssentos;
  		for( i= 0; i < N; i++){
  			buffer[i] = new Struct(nAssentos);
  		}
@@ -32,6 +34,7 @@ class Buffer{
    		int id;
    		int task;
    		int[] map;
+   		int i;
 
    		try {
 			while(count == 0){
@@ -43,7 +46,6 @@ class Buffer{
 			task = buffer[out].getTask();
 			map = buffer[out].getMapa();
 
-			System.out.println("Elemento consumido == ");
 			out = (out + 1) % N;
 			count--;
 			this.notify();
