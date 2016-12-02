@@ -11,6 +11,7 @@ class BanheiroUni {
   static int[] slots;
   static int  contMulher;
   static int  contHomem;
+  static int ticket;
   //int static in, out;
 
   // Construtor
@@ -19,12 +20,21 @@ class BanheiroUni {
     this.slots = new int[5];
     this.contMulher = 0;
     this.contHomem = 0;
+    this.ticket = 1;
+  }
+
+  public synchronized int getTicket(){
+    return this.ticket;
+  }
+
+  public synchronized void increaseTicket(){
+    this.ticket++;
   }
 
   // Entrada para mulheres
-  public synchronized void EntraMulher (int id) {
+  public synchronized void EntraMulher (int id, int meuTicket) {
     try {
-           while(contHomem != 0){
+           while(contHomem != 0 && meuTicket != this.ticket){
                         this.wait();
           }
           contMulher++;
@@ -36,6 +46,7 @@ class BanheiroUni {
   // Saida para mulheres
   public synchronized void SaiMulher (int id) {
       contMulher--;
+      increaseTicket();
       if(contMulher == 0){
               this.notifyAll();
       }
@@ -43,7 +54,7 @@ class BanheiroUni {
   }
 
   // Entrada para homens
-  public synchronized void EntraHomem (int id) {
+  public synchronized void EntraHomem (int id, int meuTicket) {
     try {
        while(contMulher != 0){
                this.wait();
@@ -70,6 +81,7 @@ class Mulher extends Thread {
   int id;
   int delay;
   BanheiroUni b;
+  int meuTicket;
 
   // Construtor
   Mulher (int id, int delayTime, BanheiroUni b) {
@@ -83,7 +95,8 @@ class Mulher extends Thread {
     double j=777777777.7, i;
     try {
       for (;;) {
-        this.b.EntraMulher(this.id);
+        meuTicket = b.getTicket();
+        this.b.EntraMulher(this.id, meuTicket);//--------------------------------------------------------------------------
         for (i=0; i<100000000; i++) {j=j/2;} //...loop bobo para simbolizar o tempo no banheiro
         this.b.SaiMulher(this.id);
         sleep(this.delay);
@@ -98,6 +111,7 @@ class Homem extends Thread {
   int id;
   int delay;
   BanheiroUni b;
+  int meuTicket;//--------------------------------------------------------------
 
   // Construtor
   Homem (int id, int delayTime, BanheiroUni b) {
@@ -111,7 +125,8 @@ class Homem extends Thread {
     double j=777777777.7, i;
     try {
       for (;;) {
-        this.b.EntraHomem(this.id);
+        meuTicket = getTicket();
+        this.b.EntraHomem(this.id, meuTicket);// -------------------------------------------------------------------------------
         for (i=0; i<100000000; i++) {j=j/2;} //...loop bobo para simbolizar o tempo no banheiro
         this.b.SaiHomem(this.id);
         sleep(this.delay);
