@@ -1,3 +1,5 @@
+// colocar os inseres dentro dos métodos de assento pra não dar merda
+
 import java.io.IOException;
 // Consumidor
 class Consumidor extends Thread {
@@ -16,10 +18,14 @@ class Consumidor extends Thread {
               // Método executado pela thread
               public void run (){
                // -----------> FALTA IMPLEMENTAR  A CONDIÇÃO DE PARADA DO LOOP   
-               try{      
-                  this.buffer.Remove(this.caminho);
-                }
-                catch(IOException e){}
+                     try{      
+                        this.buffer.Remove(this.caminho);
+                        this.buffer.Remove(this.caminho);
+                        this.buffer.Remove(this.caminho);
+                        this.buffer.Remove(this.caminho);
+                      }
+                      catch(IOException e){}
+
               }
 }
 
@@ -45,7 +51,7 @@ class Produtor1 extends Thread {
           //                                           |
           // legenda para  o              | --------> 1: VISUALIZAR ASSENTOS - 2: ALOCAR ASSENTO ALEATÓRIO - 3: ALOCAR ASSENTO DADO - 4: LIBERAR ASSENTO
           // segundo parametro      | 
-          
+
           v = this.a.alocaAssentoLivre(this.id);                
           this.buffer.Insere(this.id, 2, this.a.getMap());  //insere no buffer. O SEGUNDO PARÂMETRO INDICA QUAL ATIVIDADE FOI DISPARADA
 
