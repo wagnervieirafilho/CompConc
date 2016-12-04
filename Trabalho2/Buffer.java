@@ -1,4 +1,3 @@
-
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -34,37 +33,41 @@ class Buffer{
 		catch (InterruptedException e) { }
 	}
 
-  	public synchronized void Remove(String caminho) throws IOException{
+  	public  void Remove(String caminho) throws IOException{
    		FileWriter arq = new FileWriter(caminho, true);
     		PrintWriter gravarArq = new PrintWriter(arq);
 
    		int id;
    		int task;
+   		int ordem;
    		int[] map;
    		int i;
+   		synchronized(this){
+	   		try {
+	   			
+					while(count == 0){
+					       System.out.println("Buffer vazio, bloquendo thread consumidora ");
+					       this.wait();
+					       System.out.println("Posição liberada para consumo, liberando thread consumidora..... ");
+					}
 
-   		try {
-			while(count == 0){
-			       System.out.println("Buffer vazio, bloquendo thread consumidora ");
-			       this.wait();
-			       System.out.println("Posição liberada para consumo, liberando thread consumidora..... ");
-			}
+					id = buffer[out].getId(); 		// pega do buffer o id da thread
+					task = buffer[out].getTask();		// pega do buffer qual ação foi realizada por esta thread
+					map = buffer[out].getMapa();		// pega do buffer o mapa de assentos atual
+					count--;
 
-			id = buffer[out].getId(); 		// pega do buffer o id da thread
-			task = buffer[out].getTask();		// pega do buffer qual ação foi realizada por esta thread
-			map = buffer[out].getMapa();		// pega do buffer o mapa de assentos atual
+				gravarArq.printf("%d, %d [", id, task);//		|
+				for (i = 0; i < this.nAssentos; i++){		//	|
+					gravarArq.printf("%d ", map[i]);	//	|--------> grava as informações do arquivo de saída
+				}						//	|
+				gravarArq.printf("]%n");			//	|
+				arq.close();
 
-			gravarArq.printf("%d, %d, [", id, task);	//	|
-			for (i = 0; i < this.nAssentos; i++){		//	|
-				gravarArq.printf("%d ", map[i]);	//	|--------> grava as informações do arquivo de saída
-			}						//	|
-			gravarArq.printf("]%n");			//	|
-			arq.close();
-
-			out = (out + 1) % N;
-			count--;
-			this.notify();
-		} 
-		catch (InterruptedException e) {}
+				out = (out + 1) % N;
+				this.notify();
+				}
+			
+			catch (InterruptedException e) {}
+		}
 	}	
 }
