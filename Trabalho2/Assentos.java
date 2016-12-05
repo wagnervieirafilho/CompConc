@@ -28,10 +28,10 @@ class Assentos{                     			// recursos compartilhados
 				for(i = 0; i < this.n; i++){
 					j = i + 1;
 					if (t_Assentos[i] == 0) {
-						System.out.println("Assento "+j+": LIVRE");
+						//System.out.println("Assento "+j+": LIVRE");
 					}
 					else{
-						System.out.println("Assento "+j+": RESERVADO");
+						//System.out.println("Assento "+j+": RESERVADO");
 					}
 				}				
 				
@@ -77,7 +77,7 @@ class Assentos{                     			// recursos compartilhados
 			if(numAssento <= this.n){
 				if(assentosEsgotados == 0){							// se houver assentos disponíveis, tenta alocar
 					if(t_Assentos[posicao] != 0){
-						System.out.println("NEGADO! Assento "+numAssento+" já reservado");
+						//System.out.println("NEGADO! Assento "+numAssento+" já reservado");
 						a = t_Assentos;
 						
 						
@@ -86,7 +86,7 @@ class Assentos{                     			// recursos compartilhados
 					}
 					else{
 						t_Assentos[posicao] = id;
-						System.out.println("Assento "+numAssento+" reservado com sucesso para Cliente "+id);
+						//System.out.println("Assento "+numAssento+" reservado com sucesso para Cliente "+id);
 						a = t_Assentos;
 						
 						
@@ -95,7 +95,7 @@ class Assentos{                     			// recursos compartilhados
 					}
 				}
 				else{									// se não houver assentos disponíveis, exibe mensagem
-					System.out.println("Desculpe, assentos esgotados!");
+					//System.out.println("Desculpe, assentos esgotados!");
 					a = t_Assentos;
 					
 					
@@ -104,7 +104,7 @@ class Assentos{                     			// recursos compartilhados
 				}
 			}
 			else{
-				System.out.println("Este assento não existe! Escolha um assento entre 1 e "+this.n+"...");
+				//System.out.println("Este assento não existe! Escolha um assento entre 1 e "+this.n+"...");
 				a = t_Assentos;
 				
 				
@@ -132,7 +132,7 @@ class Assentos{                     			// recursos compartilhados
 			if(numAssento <= this.n){
 				if(assentosEsgotados == 0){							// se houver assentos disponíveis, tenta alocar
 					if(t_Assentos[posicao] != 0){
-						System.out.println("NEGADO! Assento "+numAssento+" já reservado");
+						//System.out.println("NEGADO! Assento "+numAssento+" já reservado");
 						a = t_Assentos;
 						
 						
@@ -141,7 +141,7 @@ class Assentos{                     			// recursos compartilhados
 					}
 					else{
 						t_Assentos[posicao] = id;
-						System.out.println("Assento "+numAssento+" reservado com sucesso para Cliente "+id);
+						//System.out.println("Assento "+numAssento+" reservado com sucesso para Cliente "+id);
 						a = t_Assentos;
 						
 						
@@ -150,7 +150,7 @@ class Assentos{                     			// recursos compartilhados
 					}
 				}
 				else{									// se não houver assentos disponíveis, exibe mensagem
-					System.out.println("Desculpe, assentos esgotados!");
+					//System.out.println("Desculpe, assentos esgotados!");
 					a = t_Assentos;
 					
 					
@@ -159,7 +159,7 @@ class Assentos{                     			// recursos compartilhados
 				}
 			}
 			else{
-				System.out.println("Este assento não existe! Escolha um assento entre 1 e "+this.n+"...");
+				//System.out.println("Este assento não existe! Escolha um assento entre 1 e "+this.n+"...");
 				a = t_Assentos;
 				
 				
@@ -180,14 +180,14 @@ class Assentos{                     			// recursos compartilhados
 			if(t_Assentos[posicao] != 0){			// se o assento estiver reservado, tenta liberá-lo
 				if(t_Assentos[posicao] == id){			// se o usuário que está tentando liberar o assento for o mesmo que o reservou, libera
 					t_Assentos[posicao] = 0;
-					System.out.println("Assento "+numAssento+" liberado com suscesso pelo cliente "+id);
+					//System.out.println("Assento "+numAssento+" liberado com suscesso pelo cliente "+id);
 				}
 				else{			// se o udsuário que está tentando liberar o assento não for o mesmo que reservou, exibe mensagem
-					System.out.println("Cliente "+id+" não pode liberar esse assento, foi reservado por: "+t_Assentos[posicao]);
+					//System.out.println("Cliente "+id+" não pode liberar esse assento, foi reservado por: "+t_Assentos[posicao]);
 				}
 			}
 			else{
-				System.out.println("O assento "+numAssento+" não pode ser liberado pois não está reservado!");  // mensagem de erro caso o usuário tente liberar um assento que não está reservado
+				//System.out.println("O assento "+numAssento+" não pode ser liberado pois não está reservado!");  // mensagem de erro caso o usuário tente liberar um assento que não está reservado
 			}
 			
 			this.buffer.Insere(id, 4, t_Assentos);

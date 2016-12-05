@@ -17,9 +17,9 @@ class Consumidor extends Thread {
               // Método executado pela thread
               public void run (){
                // -----------> FALTA IMPLEMENTAR  A CONDIÇÃO DE PARADA DO LOOP   
-                        for(i = 0; i<11;i++){
+                        for(i = 0; i<17;i++){
                              try{      
-                                this.buffer.Remove(this.caminho);
+                                this.buffer.Remove(this.caminho, this);
                               }
                               catch(IOException e){}
                         }
@@ -41,7 +41,7 @@ class Produtor1 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-          //this.a.visualizaAssentos(this.id);
+          this.a.visualizaAssentos(this.id);
 
           v = this.a.alocaAssentoLivre(this.id);                
 
@@ -62,7 +62,7 @@ class Produtor2 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-              //this.a.visualizaAssentos(this.id);
+              this.a.visualizaAssentos(this.id);
 
               this.t_assento = 2;                                                 //assento que vai tentar alocar
 
@@ -88,14 +88,14 @@ class Produtor3 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-            //this.a.visualizaAssentos(this.id);
+            this.a.visualizaAssentos(this.id);
 
             v = this.a.alocaAssentoLivre(this.id);    //aloca assento aleatório e retorna vetor que diz se foi ou não possivel alocar e qual assento foi alocado
 
             if(v[0] != 0){                                              // se a alocação de fato ocorreu, t_assento recebe o assento que foi alocado
                   t_assento = v[1];
 
-                  //this.a.visualizaAssentos(this.id);
+                  this.a.visualizaAssentos(this.id);
 
                   this.a.liberaAssento(t_assento, this.id); // libera assento que acabou de ser alocado
              }
@@ -116,7 +116,7 @@ class Produtor4 extends Thread {
 
         // Método executado pelo thread
         public void run () {
-             //this.a.visualizaAssentos(this.id);
+             this.a.visualizaAssentos(this.id);
              
               this.a.alocaAssentoDado(6,this.id);   //aloca assento 6 para cliente 4
               this.a.alocaAssentoDado(7,this.id);   //aloca assento 7 para cliente 4
