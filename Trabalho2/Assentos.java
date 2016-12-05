@@ -35,7 +35,7 @@ class Assentos{                     			// recursos compartilhados
 					}
 				}				
 				
-				this.buffer.Insere(id, 1, t_Assentos);
+				this.buffer.Insere(id, 1, 0,t_Assentos);
 		}
 
 	}
@@ -81,7 +81,7 @@ class Assentos{                     			// recursos compartilhados
 						a = t_Assentos;
 						
 						
-						this.buffer.Insere(id, 3, a);
+						this.buffer.Insere(id, 3, numAssento, a);
 						return 0;
 					}
 					else{
@@ -90,7 +90,7 @@ class Assentos{                     			// recursos compartilhados
 						a = t_Assentos;
 						
 						
-						this.buffer.Insere(id, 3, a);
+						this.buffer.Insere(id, 3, numAssento, a);
 						return 1;
 					}
 				}
@@ -99,7 +99,7 @@ class Assentos{                     			// recursos compartilhados
 					a = t_Assentos;
 					
 					
-					this.buffer.Insere(id, 3, a);
+					this.buffer.Insere(id, 3, numAssento, a);
 					return 0;
 				}
 			}
@@ -108,7 +108,7 @@ class Assentos{                     			// recursos compartilhados
 				a = t_Assentos;
 				
 				
-				this.buffer.Insere(id, 3, a);
+				this.buffer.Insere(id, 3, numAssento, a);
 				return 0;
 			}
 
@@ -136,7 +136,7 @@ class Assentos{                     			// recursos compartilhados
 						a = t_Assentos;
 						
 						
-						this.buffer.Insere(id, x, a);
+						this.buffer.Insere(id, x, numAssento, a);
 						return 0;
 					}
 					else{
@@ -145,7 +145,7 @@ class Assentos{                     			// recursos compartilhados
 						a = t_Assentos;
 						
 						
-						this.buffer.Insere(id, x, a);
+						this.buffer.Insere(id, x, numAssento, a);
 						return 1;
 					}
 				}
@@ -154,7 +154,7 @@ class Assentos{                     			// recursos compartilhados
 					a = t_Assentos;
 					
 					
-					this.buffer.Insere(id, x, a);
+					this.buffer.Insere(id, x, numAssento, a);
 					return 0;
 				}
 			}
@@ -163,7 +163,7 @@ class Assentos{                     			// recursos compartilhados
 				a = t_Assentos;
 				
 				
-				this.buffer.Insere(id, x, a);
+				this.buffer.Insere(id, x, numAssento, a);
 				return 0;
 			}
 			
@@ -190,7 +190,7 @@ class Assentos{                     			// recursos compartilhados
 				//System.out.println("O assento "+numAssento+" não pode ser liberado pois não está reservado!");  // mensagem de erro caso o usuário tente liberar um assento que não está reservado
 			}
 			
-			this.buffer.Insere(id, 4, t_Assentos);
+			this.buffer.Insere(id, 4, numAssento, t_Assentos);
 		}
 	}
 

@@ -18,7 +18,7 @@ class Buffer{
  		}
  	}
 
- 	public synchronized void Insere (int id, int task, int[] mapa) {
+ 	public synchronized void Insere (int id, int task, int assento, int[] mapa) {
  		int i;
     		try {
 			while(count == N){
@@ -27,13 +27,15 @@ class Buffer{
 			              //System.out.println("Buffer disponivel, liberando uma thread produtora..... ");
 			 }
 			 
-			 System.out.print(id+","+task+"[");
+			 ///////////////////////////////////////////////////////////////////////////
+			 System.out.print(id+","+task+","+assento+"[");
 			 for (i = 0; i < this.nAssentos; i++){		
 					System.out.print(mapa[i]+" ");
 				}
 				System.out.print("]\n");
-
-		               buffer[in].setItens(id, task, mapa);  //escreve no buffer o id da thread, qual tarefa realizou e o mapa de assentos
+			/////////////////////////////////////////////////////////////////////////////
+				
+		               buffer[in].setItens(id, task, mapa, assento);  //escreve no buffer o id da thread, qual tarefa realizou e o mapa de assentos
 
 		               in = (in + 1) % N;
 		               count++;
