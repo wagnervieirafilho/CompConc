@@ -4,7 +4,7 @@ import java.io.IOException;
 
 class Buffer{
 
-	static final int N = 5; // tamanho do buffer
+	static final int N = 5; 	// tamanho do buffer
 	private Struct[] buffer = new Struct[N];  //reserva espaco para o buffer
  	static private int count=0, in=0, out=0;   //variaveis compartilhadas
  	
@@ -14,7 +14,7 @@ class Buffer{
  		int i;
  		this.nAssentos = nAssentos;
  		for( i= 0; i < N; i++){
- 			buffer[i] = new Struct();
+ 			buffer[i] = new Struct(nAssentos);	// instancia um objeto do tipo Struct para cada posição do vetor buffer
  		}
  	}
 
@@ -23,7 +23,7 @@ class Buffer{
     		try {
 			while(count == N){
 			              //System.out.println("Buffer cheio, bloqueando thread produtora ");
-			              this.wait();
+			              this.wait();	//se o Buffer estiver cheio, a thread produtora dorme
 			              //System.out.println("Buffer disponivel, liberando uma thread produtora..... ");
 			 }
 			 
@@ -44,14 +44,14 @@ class Buffer{
 		catch (InterruptedException e) { }
 	}
 
-  	public  synchronized void Remove(String caminho, Consumidor c) throws IOException{
+  	public  synchronized void Remove(String caminho) throws IOException{
    		
    		
 	   		try {
 	   			
 				while(count == 0){
 				       //System.out.println("Buffer vazio, bloquendo thread consumidora ");
-				       this.wait();
+				       this.wait();	// se o Buffer estiver vazio, a thread consumidora dorme
 				       //System.out.println("Posição liberada para consumo, liberando thread consumidora..... ");
 				}
 
@@ -63,5 +63,5 @@ class Buffer{
 			}
 			
 			catch (InterruptedException e) {}		
-	}	
+	}
 }

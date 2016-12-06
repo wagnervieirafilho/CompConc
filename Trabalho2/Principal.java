@@ -42,11 +42,13 @@ class Principal{
 		prod4.start();
 
 
-		try { cons.join(); } catch (InterruptedException e) { return; }
-		try { prod1.join(); } catch (InterruptedException e) { return; }
-		try { prod2.join(); } catch (InterruptedException e) { return; }
-		try { prod3.join(); } catch (InterruptedException e) { return; }
-		try { prod4.join(); } catch (InterruptedException e) { return; }
+		try { prod1.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
+		try { prod2.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
+		try { prod3.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
+		try { prod4.join(); } catch (InterruptedException e) { return; }	//espera a thread terminar
+		
+
+		try { cons.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
 	}
 
 }

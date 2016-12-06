@@ -16,10 +16,10 @@ class Consumidor extends Thread {
 
               // Método executado pela thread
               public void run (){
-               // -----------> FALTA IMPLEMENTAR  A CONDIÇÃO DE PARADA DO LOOP   
+
                         for(i = 0; i<17;i++){
                              try{      
-                                this.buffer.Remove(this.caminho, this);
+                                this.buffer.Remove(this.caminho);
                               }
                               catch(IOException e){}
                         }
@@ -90,9 +90,9 @@ class Produtor3 extends Thread {
         public void run () {
             this.a.visualizaAssentos(this.id);
 
-            v = this.a.alocaAssentoLivre(this.id);    //aloca assento aleatório e retorna vetor que diz se foi ou não possivel alocar e qual assento foi alocado
+            v = this.a.alocaAssentoLivre(this.id);                 //aloca assento aleatório e retorna vetor que diz se foi ou não possivel alocar e qual assento foi alocado
 
-            if(v[0] != 0){                                              // se a alocação de fato ocorreu, t_assento recebe o assento que foi alocado
+            if(v[0] != 0){                                                                       // se a alocação de fato ocorreu, t_assento recebe o assento que foi alocado
                   t_assento = v[1];
 
                   this.a.visualizaAssentos(this.id);
