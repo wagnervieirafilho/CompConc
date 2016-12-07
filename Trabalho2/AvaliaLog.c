@@ -1,3 +1,5 @@
+
+//Avaliador do log de saída
 #include <stdio.h>
 #include <string.h>
 
