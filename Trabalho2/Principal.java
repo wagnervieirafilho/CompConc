@@ -57,7 +57,7 @@ class Principal{
        			prod4[i].start();
     		}
 
-    		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer);		//inicia a thread consumidora
+    		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer, nASSENTOS);		//inicia a thread consumidora
 		cons.start();
 
 

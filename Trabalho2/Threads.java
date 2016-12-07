@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 // Consumidor
 class Consumidor extends Thread {
               int id;
@@ -6,18 +8,26 @@ class Consumidor extends Thread {
               String caminho;
               int i;
               Buffer buffer;
+              int n;
 
-              Consumidor (int id, Assentos a,  String caminhoSaida, Buffer buffer) {
+              Consumidor (int id, Assentos a,  String caminhoSaida, Buffer buffer, int n) {
                     this.id = id;
                     this.a = a;
                     this.caminho = caminhoSaida;
                     this.buffer = buffer;
+                    this.n = n;
               }
 
               // Método executado pela thread
               public void run (){
 
               try{  
+
+                      FileWriter arq = new FileWriter(caminho, true);
+                      PrintWriter gravarArq = new PrintWriter(arq);
+                      gravarArq.printf("%d%n",this.n);
+                      arq.close();
+
                       while(this.buffer.getEstado()== false)    {   // indica quando as threds produtoras já terminaram de executar
                                 this.buffer.Remove(this.caminho);
                         }
