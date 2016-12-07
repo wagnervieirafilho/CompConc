@@ -7,6 +7,7 @@ class Buffer{
 	static final int N = 5; 	// tamanho do buffer
 	private Struct[] buffer = new Struct[N];  //reserva espaco para o buffer
  	static private int count=0, in=0, out=0;   //variaveis compartilhadas
+ 	static private boolean estado = false;
  	
  	int nAssentos;
 
@@ -46,10 +47,9 @@ class Buffer{
 
   	public  synchronized void Remove(String caminho) throws IOException{
    		
-   		
 	   		try {
 	   			
-				while(count == 0){
+				while(count == 0 && this.estado == false){
 				       //System.out.println("Buffer vazio, bloquendo thread consumidora ");
 				       this.wait();	// se o Buffer estiver vazio, a thread consumidora dorme
 				       //System.out.println("Posição liberada para consumo, liberando thread consumidora..... ");
@@ -62,6 +62,16 @@ class Buffer{
 				this.notify();
 			}
 			
-			catch (InterruptedException e) {}		
+			catch (InterruptedException e) {}
+		
+	}
+
+	public synchronized void setEstado(boolean est){
+		this.estado = est;
+		this.notify();
+	}
+
+	public synchronized boolean getEstado(){
+		return this.estado;
 	}
 }

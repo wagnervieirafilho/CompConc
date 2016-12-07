@@ -17,12 +17,12 @@ class Consumidor extends Thread {
               // Método executado pela thread
               public void run (){
 
-                        for(i = 0; i<17;i++){
-                             try{      
+              try{  
+                      while(this.buffer.getEstado()== false)    {
                                 this.buffer.Remove(this.caminho);
-                              }
-                              catch(IOException e){}
                         }
+              } catch(IOException e){}
+                        
               }
 }
 

@@ -26,8 +26,6 @@ class Principal{
 		Produtor3 prod3;
 		Produtor4 prod4;
 
-		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer);	//inicia a thread consumidora
-		cons.start();
 
 		prod1 = new Produtor1(1, assentos);		//inicia a thread que simula um cliente fazendo uma certa série de operações
 		prod1.start();
@@ -41,14 +39,18 @@ class Principal{
 		prod4 = new Produtor4(4, assentos);		//inicia a thread que simula um cliente fazendo outra certa série de operações
 		prod4.start();
 
+		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer);	//inicia a thread consumidora
+		cons.start();
 
 		try { prod1.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
 		try { prod2.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
 		try { prod3.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
 		try { prod4.join(); } catch (InterruptedException e) { return; }	//espera a thread terminar
 		
+		buffer.setEstado(true);
 
 		try { cons.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
+		
 	}
 
 }
