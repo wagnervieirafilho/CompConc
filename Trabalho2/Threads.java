@@ -18,7 +18,7 @@ class Consumidor extends Thread {
               public void run (){
 
               try{  
-                      while(this.buffer.getEstado()== false)    {
+                      while(this.buffer.getEstado()== false)    {   // indica quando as threds produtoras já terminaram de executar
                                 this.buffer.Remove(this.caminho);
                         }
               } catch(IOException e){}
@@ -27,7 +27,7 @@ class Consumidor extends Thread {
 }
 
 // Produtor
-class Produtor1 extends Thread {
+class Produtor1 extends Thread {    // thread que simula um cliente realizando determinada sequência de ações
         int id;
         Assentos a;
         int t_assento;
@@ -49,8 +49,7 @@ class Produtor1 extends Thread {
        }
 } 
 
-class Produtor2 extends Thread {
-        int id;
+class Produtor2 extends Thread {    // thread que simula um cliente realizando outra sequência de ações
         Assentos a;
         int t_assento;
 
@@ -73,7 +72,7 @@ class Produtor2 extends Thread {
         }
 } 
 
-class Produtor3 extends Thread {
+class Produtor3 extends Thread {    // thread que simula um cliente realizando outra sequência de ações
         int id;
         Assentos a;
         int t_assento;
@@ -104,7 +103,7 @@ class Produtor3 extends Thread {
         }
 } 
 
-class Produtor4 extends Thread {
+class Produtor4 extends Thread {    // thread que simula um cliente realizando outra sequência de ações
         int id;
         Assentos a;
 

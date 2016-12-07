@@ -25,78 +25,59 @@ class Principal{
 		Buffer buffer = new Buffer(nASSENTOS);		// Monitor
 		Assentos assentos = new Assentos(nASSENTOS, buffer);	// assentos
 
-		Consumidor cons;
-    		Produtor1[] prod1 = new Produtor1[P1];
-    		Produtor2[] prod2 = new Produtor2[P2];
-    		Produtor3[] prod3= new Produtor3[P3];
-    		Produtor4[] prod4 = new Produtor4[P4];
+		Consumidor cons; // thread consumidora
+    		Produtor1[] prod1 = new Produtor1[P1];	// vetor de threads do produtor 1
+    		Produtor2[] prod2 = new Produtor2[P2];	// vetor de threads do produtor 2
+    		Produtor3[] prod3= new Produtor3[P3];	// vetor de threads do produtor 3
+    		Produtor4[] prod4 = new Produtor4[P4];	// vetor de threads do produtor 4
 
 		
 
     		for (i=1; i<=P1; i++) {
-       			prod1[i-1] = new Produtor1(i,assentos);
+       			prod1[i-1] = new Produtor1(i,assentos);		// inicia todas as threads produtor 1
        			prod1[i-1].start();
     		}
 		
     		id = P1+1;
 		for (i=0; i<P2; i++) {
-       			prod2[i] = new Produtor2(id,assentos);
+       			prod2[i] = new Produtor2(id,assentos);		// inicia todas as threads produtor 2
        			id++;
        			prod2[i].start();
     		}
 
     		for (i=0; i<P3; i++) {
-       			prod3[i] = new Produtor3(id,assentos);
+       			prod3[i] = new Produtor3(id,assentos);		// inicia todas as threads produtor 3
        			id++;
        			prod3[i].start();
     		}
 
     		for (i=0; i<P4; i++) {
-       			prod4[i] = new Produtor4(id,assentos);
+       			prod4[i] = new Produtor4(id,assentos);		// inicia todas as threads produtor 4
        			id++;
        			prod4[i].start();
     		}
 
-    		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer);	//inicia a thread consumidora
+    		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer);		//inicia a thread consumidora
 		cons.start();
 
-		/*prod1 = new Produtor1(1, assentos);		//inicia a thread que simula um cliente fazendo uma certa série de operações
-		prod1.start();
-
-		prod2 = new Produtor2(2, assentos);		//inicia a thread que simula um cliente fazendo outra certa série de operações
-		prod2.start();
-
-		prod3 = new Produtor3(3, assentos);		//inicia a thread que simula um cliente fazendo outra certa série de operações
-		prod3.start();
-
-		prod4 = new Produtor4(4, assentos);		//inicia a thread que simula um cliente fazendo outra certa série de operações
-		prod4.start();
-
-		cons = new Consumidor(0, assentos, caminhoArqSaida, buffer);	//inicia a thread consumidora
-		cons.start();*/
-
-		/*try { prod1.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
-		try { prod2.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
-		try { prod3.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
-		try { prod4.join(); } catch (InterruptedException e) { return; }	//espera a thread terminar*/
 
 		for (i=0; i<P1; i++) {
-			try{ prod1[i].join(); }catch(InterruptedException e){return;}
+			try{ prod1[i].join(); }catch(InterruptedException e){return;}	// espera as threads terminarem
     		}
 
     		for (i=0; i<P2; i++) {
-			try{ prod2[i].join(); }catch(InterruptedException e){return;}
+			try{ prod2[i].join(); }catch(InterruptedException e){return;}	// espera as threads terminarem
     		}
 
     		for (i=0; i<P3; i++) {
-			try{ prod3[i].join(); }catch(InterruptedException e){return;}
+			try{ prod3[i].join(); }catch(InterruptedException e){return;}	// espera as threads terminarem
     		}
 
     		for (i=0; i<P4; i++) {
-			try{ prod4[i].join(); }catch(InterruptedException e){return;}
+			try{ prod4[i].join(); }catch(InterruptedException e){return;}	// espera as threads terminarem
     		}
 		
-		buffer.setEstado(true);
+		buffer.setEstado(true);		// indica para a thread consumidora que as produtoras já terminaram e nada mais será produzido
 
 		try { cons.join(); } catch (InterruptedException e) { return; }	// espera a thread terminar
 		
