@@ -52,6 +52,7 @@ class Produtor1 extends Thread {    // thread que simula um cliente realizando d
 class Produtor2 extends Thread {    // thread que simula um cliente realizando outra sequência de ações
         Assentos a;
         int t_assento;
+        int id;
 
         // Construtor
         Produtor2 (int id, Assentos a) {
