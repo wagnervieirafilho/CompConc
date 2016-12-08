@@ -10,6 +10,14 @@
 int* v;
 int* v2;
 
+// protótipos das funções
+void visualizaAssentos();
+void alocaAssentoLivre(int id, int assento);
+void alocaAssentoDado(int id, int assento);
+void liberaAssento(int id, int assento);
+void comparaVetores();
+// colocar dentro da comparaVetores int avalia = TRUE;
+
 int main(int argc, char const *argv[])
 {
 	char caminho[300];
@@ -24,8 +32,7 @@ int main(int argc, char const *argv[])
 
 	int i,j,k;
 	int cont;
-	int aux;
-	int avalia = TRUE;
+	int aux;	
 
 	FILE *arq;
 
@@ -76,8 +83,8 @@ int main(int argc, char const *argv[])
 			assento = atoi(elemento);	// atribui a assento o numero do assento
 			strcpy(elemento,"");
 
-
-
+//toda essa parte é pra copiar do arquivo a lista de assentos e atribuir ao vetor para posterior comparação
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 			i = i+2;				// passa o i para a primeira posição do vetor do arquivo
 			aux = i;
 			for(j = 0; j < nAssentos; j++){
@@ -98,11 +105,23 @@ int main(int argc, char const *argv[])
 				i++;
 				aux = i;
 			}
-			printf("%d, %d, %d [", id, task, assento );
-			for (j = 0; j < nAssentos; j++){
-				printf("%d ", v2[j]);
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+			if(task == 1){
+				visualizaAssentos();
+				comparaVetores();
 			}
-			printf("]\n");
+			if(task == 2){
+				alocaAssentoLivre(id, assento);
+				comparaVetores();
+			}
+			if(task == 3){
+				alocaAssentoDado(id, assento);
+				comparaVetores();
+			}
+			if(task == 4){
+				liberaAssento(id, assento);
+				comparaVetores();
+			}
 
 		}		
 
@@ -112,4 +131,20 @@ int main(int argc, char const *argv[])
 
 
 	return 0;
+}
+
+void visualizaAssentos(){
+
+}
+void alocaAssentoLivre(int id, int assento){
+
+}
+void alocaAssentoDado(int id, int assento){
+
+}
+void liberaAssento(int id, int assento){
+
+}
+void comparaVetores(){
+	
 }
