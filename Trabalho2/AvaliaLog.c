@@ -9,6 +9,7 @@ int main(int argc, char const *argv[])
 	char caminho[300];
 	char linha[300];
 	char elemento[10] = "";
+	char chr[2];
 
 	int* v;
 	int* v2;
@@ -18,8 +19,9 @@ int main(int argc, char const *argv[])
 	int assento;
 	int nAssentos;
 
-	int i;
+	int i,j;
 	int cont;
+	int aux;
 
 	FILE *arq;
 
@@ -37,8 +39,41 @@ int main(int argc, char const *argv[])
 		}
 
 		while( (fgets(linha, sizeof(linha), arq))!=NULL ){
-			/* Aqui tem que separar os elementos e atribuir a id, task e assento*/
-		}	
+			
+			i = 0;
+			cont = 0;
+			while(linha[i] != ','){
+				cont++;			// conta quantos dígitos tem antes da primeira  vírgula
+				i++;			
+			}
+			strncat(elemento, linha, cont);	// copia os dígitos para uma  substring
+			id = atoi(elemento);		// converte a string para int e atribui a id.
+			strcpy(elemento,"");		// zera a substring para ser reutilizada
+
+			i = i+2;				// passa o i para para o próximo numero no arquivo
+			task = linha[i] - 48;		/* faz a conversão de string para int usando a tabela ASCII (0 é 48 na ASCII)
+							     e atribui o valor a task*/
+
+			i = i+3;				// passa o i para o próximo numero do arquivo
+			aux = i;
+
+			cont = 0;
+			while(linha[i] != ' '){
+				cont++;			// conta quantos dígitos tem antes do espaço antes do vetor
+				 i++;			
+			}
+
+			for (j = 0; j < cont; j++){
+				chr[0] = linha[aux];
+				strcat(elemento, chr);
+				aux++;
+			}
+			assento = atoi(elemento);
+			strcpy(elemento,"");
+
+			printf("%d, %d, %d\n", id, task, assento);
+
+		}		
 
 	}
 
