@@ -55,7 +55,7 @@ class Buffer{
 				       //System.out.println("Posição liberada para consumo, liberando thread consumidora..... ");
 				}
 
-				buffer[out].salvaNoArquivo(this.nAssentos, caminho);
+				buffer[out].salvaNoArquivo(caminho);
 				out = (out + 1) % N;
 				count--;
 

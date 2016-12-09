@@ -1,6 +1,10 @@
 Programa de reserva de assentos:
 	- Para compilar digite: "javac *.java"
 	- Para executar digite: "java Principal <caminho do arquivo de saída> <número de assentos>"
+	PS.: Se, a cada nova excução, o arquivo de saída for o mesmo, ele deve ser limpo ou apagado antes da nova
+	     execução pois o programa irá concatenar os logs,
+	     ou seja, se o arquivo não for limpo, todos os logs de todas as execuções ficarão em sequência em um único arquivo.
+	     Ou então use arquivos diferentes a cada execução.
 
 Programa de avaliação do log de execução
 	- Para compilar digite: "gcc AvaliaLog.c -o log"

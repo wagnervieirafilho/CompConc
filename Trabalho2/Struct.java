@@ -13,7 +13,7 @@ class Struct{
 		this.n = n;		// pega o numero de assentos
 	}
 
-	public synchronized  void setItens(int id, int task, int[] mapa, int assento){  // insere os elementos na posição do buffer
+	public   void setItens(int id, int task, int[] mapa, int assento){  // insere os elementos na posição do buffer
 		int i;
 		this.id = id;		// pega o ID da thread que executou
 		this.task = task;	// pega a tarefa que foi executada
@@ -24,7 +24,7 @@ class Struct{
 		}
 	}
 
-	public synchronized void salvaNoArquivo(int n, String caminho){
+	public  void salvaNoArquivo(String caminho){
     		int i;
 
 		try{
@@ -32,7 +32,7 @@ class Struct{
 	    		PrintWriter gravarArq = new PrintWriter(arq);
 
 			gravarArq.printf("%d, %d, %d [", this.id, this.task, this.assento);	// grava no arquivo o ID, task e assento que estão gravado no buffer
-			for (i = 0; i < n; i++){							
+			for (i = 0; i < this.n; i++){							
 				gravarArq.printf("%d ", this.mapa[i]);				// grava no arquivo o mapa de assentos que está gravado no buffer
 			}						
 			gravarArq.printf("]%n");			

@@ -11,10 +11,10 @@ import java.io.IOException;
 class Principal{
 	static int nASSENTOS;
 	static String caminhoArqSaida;
-	static int P1= 10;
-	static int P2= 10;
-	static int P3= 10;
-	static int P4= 10;
+	static int P1= 2;
+	static int P2= 3;
+	static int P3= 3;
+	static int P4= 3;
 
 	public static void main(String[] args){
 		int i;
