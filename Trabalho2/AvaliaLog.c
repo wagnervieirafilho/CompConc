@@ -10,13 +10,14 @@
 int* v;
 int* v2;
 
+int nAssentos;
+
 // protótipos das funções
 void visualizaAssentos();
 void alocaAssentoLivre(int id, int assento);
 void alocaAssentoDado(int id, int assento);
 void liberaAssento(int id, int assento);
-void comparaVetores();
-// colocar dentro da comparaVetores int avalia = TRUE;
+int comparaVetores();
 
 int main(int argc, char const *argv[])
 {
@@ -28,7 +29,7 @@ int main(int argc, char const *argv[])
 	int id;
 	int task;
 	int assento;
-	int nAssentos;
+	int linhaDoArquivo = 2;
 
 	int i,j,k;
 	int cont;
@@ -108,43 +109,94 @@ int main(int argc, char const *argv[])
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 			if(task == 1){
 				visualizaAssentos();
-				comparaVetores();
+				if(comparaVetores() == FALSE)
+					printf("Falha! linha %d\n", linhaDoArquivo);
+				else
+					printf("Sucesso!\n");
 			}
 			if(task == 2){
 				alocaAssentoLivre(id, assento);
-				comparaVetores();
+				if(comparaVetores() == FALSE)
+					printf("Falha! linha %d\n", linhaDoArquivo);
+				else
+					printf("Sucesso!\n");
 			}
 			if(task == 3){
 				alocaAssentoDado(id, assento);
-				comparaVetores();
+				if(comparaVetores() == FALSE)
+					printf("Falha! linha %d\n", linhaDoArquivo);
+				else
+					printf("Sucesso!\n");
 			}
 			if(task == 4){
 				liberaAssento(id, assento);
-				comparaVetores();
+				if(comparaVetores() == FALSE)
+					printf("Falha! linha %d\n", linhaDoArquivo);
+				else
+					printf("Sucesso!\n");
 			}
-
-		}		
+			linhaDoArquivo++;
+		}
 
 	}
 
 	fclose(arq);
-
-
 	return 0;
 }
 
 void visualizaAssentos(){
-
+	// não altera o vetor
 }
 void alocaAssentoLivre(int id, int assento){
+	int posicao = assento-1;
+	int i;
+	int assentosEsgotados = 1;
+
+	for (i = 0; i < nAssentos; i++){
+		if(v[i] == 0)
+			assentosEsgotados = 0;
+	}
+
+	if(assento <= nAssentos){
+		if(assentosEsgotados == 0){
+			if(v[posicao] == 0)
+				v[posicao] = id;
+		}
+	}
 
 }
 void alocaAssentoDado(int id, int assento){
+	int posicao = assento-1;
+	int i;
+	int assentosEsgotados = 1;
 
+	for (i = 0; i < nAssentos; i++){
+		if(v[i] == 0)
+			assentosEsgotados = 0;
+	}
+
+	if(assento <= nAssentos){
+		if(assentosEsgotados == 0){
+			if(v[posicao] == 0)
+				v[posicao] = id;
+		}
+	}
 }
 void liberaAssento(int id, int assento){
+	int posicao = assento-1;
+	if(v[posicao] != 0){
+		if(v[posicao] == id){
+			v[posicao] = 0;
+		}
+	}
 
 }
-void comparaVetores(){
-	
+int comparaVetores(){
+	int avalia = TRUE;
+	int i;
+	for (i = 0; i < nAssentos; i++){
+		if(v[i] != v2[i])
+			avalia = FALSE;
+	}
+	return avalia;
 }
