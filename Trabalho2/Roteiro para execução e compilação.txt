@@ -1,0 +1,8 @@
+Programa de reserva de assentos:
+	- Para compilar digite: "javac *.java"
+	- Para executar digite: "java Principal <caminho do arquivo de saída> <número de assentos>"
+
+Programa de avaliação do log de execução
+	- Para compilar digite: "gcc AvaliaLog.c -o log"
+	- Para executar digite: "./log <caminho do arquivo de saída>"
+
